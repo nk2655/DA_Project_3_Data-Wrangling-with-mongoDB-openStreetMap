@@ -2,13 +2,13 @@
 by NK Zhehua Zou
 
 ### Description of scripts
-1) street.py  
+##### 1) street.py  
 This file use for data wrangling, it will audit street name and corret them.  
 We will import is_street_name and update_street function from here to shape.py  
-2) zipcode.py  
+##### 2) zipcode.py  
 This file also use for data wrangling, it will audit zipcode and corret them.  
 We will import is_zipcode and update_zipcode function from here to shape.py  
-3) shape.py  
+##### 3) shape.py  
 This is a multifunctional script file.  
 we use shape_elemnt function to wrangle data and parse it.  
 We use process_map to write json and output to mongoDB.  
