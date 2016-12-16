@@ -29,7 +29,7 @@ For the follinwg function: key_type & process_key. We check the "k" value for ea
 94 peoples invovlved in the map editing.  
   
 ### 2. Problems Encountered in the Map
-After initially downloading a small sample size of the San Jose area and running it, I noticed three main problems with the data, which I will discuss in the following order:  
+After initially downloading a small sample size of the San Jose area and running it, I noticed two main problems with the data, which I will discuss in the following order:  
 1) Abbreviated street names ('Branham Ln')  
 2) Inconsistent postal codes ('CA950543', '95014-1899')  
   
