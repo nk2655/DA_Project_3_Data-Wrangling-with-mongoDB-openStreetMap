@@ -1,7 +1,7 @@
 # Data_Wrangling_with_mongoDB_OpenStreetMap
 by NK Zhehua Zou
 
-##### Description of scripts
+### Description of scripts
 1) street.py  
 This file use for data wrangling, it will audit street name and corret them.  
 We will import is_street_name and update_street function from here to shape.py  
