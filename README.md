@@ -10,23 +10,25 @@ This file also use for data wrangling, it will audit zipcode and corret them.
 We will import is_zipcode and update_zipcode function from here to shape.py  
 ##### 3) shape.py  
 This is a multifunctional script file.  
+We from street import is_street_name, update_street, mapping_street, mapping_abbrev to cleaning street name  
+We from zipcode import is_zipcode, update_zipcode to cleaning zipcode  
 we use shape_elemnt function to wrangle data and parse it.  
 We use process_map to write json and output to mongoDB.  
   
 ### 1. Data Audit
 ##### Tags
 Parse through the San Jose dataset with ElementTree and count the number of unique element types to get an overall understanding of the data by using count_tags function.  
-{'bounds': 1, 'member': 115, 'nd': 21564, 'node': 13332, 'osm': 1, 'relation': 21, 'tag': 7128, 'way': 3721}  
+{'bounds': 1, 'member': 14382, 'nd': 1508760, 'node': 1291540, 'osm': 1, 'relation': 1363, 'tag': 693140, 'way': 171911}  
   
 ##### Keys Type
 For the follinwg function: key_type & process_key. We check the "k" value for each.   
 "lower", for tags that contain only lowercase letters and are valid.  
 "lower_colon", for otherwise valid tags with a colon in their names.  
 "problemchars", for tags with problematic characters.  
-{'lower': 6751, 'lower_colon': 363, 'other': 14, 'problemchars': 0}  
+{'lower': 378290, 'lower_colon': 291114, 'other': 23736, 'problemchars': 0}  
   
 ##### Users
-94 peoples invovlved in the map editing.  
+1265 peoples invovlved in the map editing.  
   
 ### 2. Problems Encountered in the Map
 After initially downloading a small sample size of the San Jose area and running it, I noticed two main problems with the data, which I will discuss in the following order:  
@@ -45,10 +47,14 @@ Once the data was imported to MongoDB, some basic querying revealed street name 
 ##### Zip Codes
 Postal code strings posed a different sort of problem, forcing a decision to strip all leading and trailing characters before and after the main 5-digit zip code. This effectually dropped all leading state characters (as in 'CA950543') and 4-digit zip code extensions following a hyphen ('95014-1899'). This 5-digit constriction benefits MongoDB aggregation calls on postal codes.  
 1) Although most of the zip code is correct, there're still a lot of zip code with incorrect 5 digit formats. We will process it like update street name.  
-2 )The output of the clean zip code is summarised below. There are the format of 5 digits or string 'None'.  
+2 )The output of the clean zip code are the format of 5 digits or string 'None'.  
   
 ### 3. Data Overview
 This section contains basic statistics about the dataset and the MongoDB queries used to gather them.  
+We from street import is_street_name, update_street, mapping_street, mapping_abbrev to cleaning street name  
+We from zipcode import is_zipcode, update_zipcode to cleaning zipcode  
+we use shape_elemnt function to wrangle data and parse it.  
+We use process_map to write json and output to mongoDB. 
 Preparing for MongoDB by converting XML to JSON  
 In order to transform the data from XML to JSON, we need to follow these rules:  
 1) Process only 2 types of top level tags: "node" and "way"  
@@ -60,14 +66,11 @@ In order to transform the data from XML to JSON, we need to follow these rules:
 After all the cleaning and data transformation are done, we would use last function process_map and convert the file from XML into JSON format  
 
 ##### File sizes
-The original OSM file is 3.329866 MB  
-The JSON file is 3.795992 MB  
-The number of documents is 17053  
-The number of node is 13332  
-The number of way is 3721  
-The number of unique users is 91  
-The first contributor is TELCOM IP with 4921 contributions.  
-There is 22 users appearing only once.  
+1) Best contributor gave 19% documents, almost 1/5 of total contributions.  
+2) Four contributors also over 40% total contributions, it means top 2, top 3 and top 4 contributors are far behind top 1 contributors.  
+3) Just 100 contributors already gave 95% of total documents, it means rest of people almost have not any contributors in here even if still have 21% contributors gave one post.  
+4) Every contributor shall gave 1164 documents by average contribution, but most of people can't close to this number.  
+5) What incentives should we increase? Perhaps we can refer to the experience of waze, which is a great application for navigation app. We can be divided different levels according to contribution, each level users will enjoy different privileges, badges and rewards.  
   
 ### 4. Additional Ideas
 Contributor statistics and suggestion  
@@ -79,11 +82,11 @@ According to these results below, we found unbelievable truth.
 5) What incentives should we increase? Perhaps we can refer to the experience of waze, which is a great application for navigation app. We can be divided different levels according to contribution, each level users will enjoy different privileges, badges and rewards.  
   
 ##### Additional data exploration using MongoDB queries
-1) 17053 people living in this area.  
-2) We found most amenities are bus stations, gas stations (fuel) and schools in this area. Let's explorating them.  
-3) I am a bit suprised for this result, there has many long distance bus station in this small area. I though there has many caltrain or city bus stations.  
-4) It looks like Grifo has most gas stations in this area, no much suprised for this result, but I can't belive only 1 Vista and have not some popular gas station like Shell in here.  
-5) Pescador is the most popular restaurant in this area, they have 2 restaurant in here. After google it, I found this is a fish restaurant and keep a lower rate 3 in 5 stars. Interesting, they don't have delicious food for residents?  
+1) 1463451 people living in this area.  
+2) We found most amenities are Parking and restaurant, it make sence for a Metropolitan area.  
+3) I am not suprise to many city bus stations in this Metropolitan area.  
+4) Shell, 76, Valeroand Chevron have most gas stations in this area, no much suprised for this result, They are every where in Bay Area.  
+5) Pizza My Heart is the most popular restaurant in this area, they have 9 restaurants in here. I have been there before, their pizza really taste good, but I still have a bit suprise to this result, I though Thaifood is most popular food in San Jose.  
   
 ### 5. Conclusion
 1) The map about the city of San Jose is relatively clean so I could retrieve some interesting content. But still the data is not entirely clean.  

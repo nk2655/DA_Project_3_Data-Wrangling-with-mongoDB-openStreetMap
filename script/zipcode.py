@@ -4,6 +4,8 @@ from collections import defaultdict
 import sys
 data = 'data/sample.osm'
 
+''' In this dataset, some zipcode are invalid format such as CUPERTINO, 140010, etc.
+If the zipcode is not digit or start without 95, add to invalid zicodes.'''
 def audit_zipcode(invalid_zipcodes, zipcode):
     twoDigits = zipcode[0:2]
     if not twoDigits.isdigit():
@@ -23,7 +25,12 @@ def audit_zip(osmfile):
                 if is_zipcode(tag):
                     audit_zipcode(invalid_zipcodes,tag.attrib['v'])
     return invalid_zipcodes
-	
+
+''' We check zipcode, if start with CA, we go to next step, return to first 5 digitals, drop last 4 digitals.
+If zipcode is digit an start with 95, also return to first 5 digitals.
+other situation such as CUPERTINO or 140010, all return to string None.
+Remeber, must return a sting, it will not work even you want to return to 95001,Regular expression also will return to an array.
+'''	
 def update_zipcode(zipcode):
     testNum = re.findall('[a-zA-Z]*', zipcode)
     if testNum:
