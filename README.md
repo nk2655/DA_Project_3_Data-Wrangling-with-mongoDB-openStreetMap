@@ -1,8 +1,15 @@
-# Data-Wrangling-with-mongoDB-OpenStreetMap
-Description of Project  
+# Data-Wrangling-with-mongoDB-OpenStreetMap  
+  
+### Description of Project  
 • Downloaded map of San Jose from https://www.openstreetmap.org and used data munging techniques to clean the OpenStreetMap data.  
 • Technologies Used: pandas, re, ET, pymongo, json  
 
+### Run Instruction
+1 - You have to installed python 2.7 and mongoDB before run this project.  
+2 - Run Jupyter notebook and mongoDB.  
+3 - Run shape.py to cleaning data and export a json file to mongoDB.  
+4 - Run pynb file to analyze data.  
+  
 ### Description of scripts
 ##### 1) street.py  
 This file use for data wrangling, it will audit street name and corret them.  
