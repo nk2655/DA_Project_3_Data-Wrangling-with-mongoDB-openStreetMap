@@ -1,7 +1,7 @@
 # Data-Wrangling-with-mongoDB-OpenStreetMap  
   
 ### Description of Project  
-• Downloaded map of San Jose from https://www.openstreetmap.org and used data munging techniques to clean the OpenStreetMap data.  
+• Downloaded map of San Jose from https://www.openstreetmap.org and used data munging techniques, such as assessing the quality of the data for validity, accuracy, completeness, consistency and uniformity, to clean the OpenStreetMap data for San Jose.  
 • Technologies Used: pandas, re, ET, pymongo, json  
 
 ### Run Instruction
